@@ -12,7 +12,7 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/product/{id}', [ProductController::class , 'show']);
 Route::post('/product', [ProductController::class , 'store']);
-Route::get('/product/{id}', [ProductController::class , 'destroy']);
+Route::delete('/product/{id}', [ProductController::class , 'destroy']);
 Route::put('/product', [ProductController::class , 'update']);
 
 
