@@ -10,9 +10,9 @@ Route::get('/user', function (Request $request) {
 
 //Route::apiResource('/products',ProductController::class);
 
-Route::get('/product', [ProductController::class , 'show']);
+Route::get('/product/{id}', [ProductController::class , 'show']);
 Route::post('/product', [ProductController::class , 'store']);
-Route::delete('/product/{id}', [ProductController::class , 'destroy']);
+Route::get('/product/{id}', [ProductController::class , 'destroy']);
 Route::put('/product', [ProductController::class , 'update']);
 
 
