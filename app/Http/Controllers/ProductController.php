@@ -7,7 +7,7 @@ use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
-use App\Service\ProductService;
+use App\Services\ProductService;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -34,12 +34,12 @@ class ProductController extends Controller
     }
     public function store(StoreProductRequest $request)
     {
-        $details = ['name' => $request->name, 'detail'=> $request->details];
-
+        $details = ['name' => $request->name, 'details'=> $request->details];
+            
         DB::beginTransaction();
         try{
              $product = $this->productService->store($details);
-
+               
              DB::commit();
              return ApiResponseClass::sendResponse(new ProductResource($product),'Produto cadastrado com sucesso',201);
 
@@ -63,8 +63,11 @@ class ProductController extends Controller
             'name' => $request->name,
             'details' => $request->details
         ];
+
+        dd($updateDetails);
         DB::beginTransaction();
         try{
+     
              $product = $this->productService->update($updateDetails,$id);
 
              DB::commit();
