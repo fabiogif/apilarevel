@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function __construct(private ProductService $productService)
     {
     }
- 
+
     public function index()
     {
         $data = $this->productService->index();
@@ -26,20 +26,20 @@ class ProductController extends Controller
 
     public function create(StoreProductRequest $request)
     {
-       
+
     }
     public function edit(Product $product)
     {
-      
+
     }
     public function store(StoreProductRequest $request)
     {
         $details = ['name' => $request->name, 'details'=> $request->details];
-            
+
         DB::beginTransaction();
         try{
              $product = $this->productService->store($details);
-               
+
              DB::commit();
              return ApiResponseClass::sendResponse(new ProductResource($product),'Produto cadastrado com sucesso',201);
 
@@ -64,10 +64,9 @@ class ProductController extends Controller
             'details' => $request->details
         ];
 
-        dd($updateDetails);
         DB::beginTransaction();
         try{
-     
+
              $product = $this->productService->update($updateDetails,$id);
 
              DB::commit();
@@ -78,7 +77,7 @@ class ProductController extends Controller
         }
     }
 
- 
+
     public function destroy($id)
     {
         $this->productService->delete($id);
