@@ -8,7 +8,6 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Services\ProductService;
-use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -34,10 +33,8 @@ class ProductController extends Controller
     }
     public function store(StoreProductRequest $request)
     {
-        $details = ['name' => $request->name, 'details'=> $request->details];
-
         try{
-             $product = $this->productService->store($details);
+             $product = $this->productService->store($request->all());
 
              return ApiResponseClass::sendResponse(new ProductResource($product),'Produto cadastrado com sucesso',201);
 
@@ -58,12 +55,7 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, $id)
     {
         try{
-            $updateDetails =[
-                'name' => $request->name,
-                'details' => $request->details
-            ];
-
-            $this->productService->update($updateDetails,$id);
+            $this->productService->update($request->all(),$id);
             return ApiResponseClass::sendResponse('Produto atualizado com sucesso','',201);
 
         }catch(\Exception $ex){
@@ -74,8 +66,12 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
+        try{
         $this->productService->delete($id);
-
         return ApiResponseClass::sendResponse('Produto removido com sucesso','',204);
+
+        }catch(\Exception $ex){
+            return ApiResponseClass::rollback($ex);
+        }
     }
 }
