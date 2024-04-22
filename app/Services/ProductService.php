@@ -7,7 +7,6 @@ use App\Interfaces\ProductRepositoryInterface;
 class ProductService
 {
 
-
     public function __construct(private ProductRepositoryInterface $productRepositoryInterface)
     {}
 
@@ -21,7 +20,7 @@ class ProductService
     {
         return $this->productRepositoryInterface->getById($id);
     }
-    
+
 
     public function store(array $data)
     {

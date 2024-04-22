@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
 
-    public function __construct(private ProductService $productService)
+    public function __construct(private readonly ProductService $productService)
     {
     }
 
@@ -36,11 +36,9 @@ class ProductController extends Controller
     {
         $details = ['name' => $request->name, 'details'=> $request->details];
 
-        DB::beginTransaction();
         try{
              $product = $this->productService->store($details);
 
-             DB::commit();
              return ApiResponseClass::sendResponse(new ProductResource($product),'Produto cadastrado com sucesso',201);
 
         }catch(\Exception $ex){
@@ -59,18 +57,14 @@ class ProductController extends Controller
 
     public function update(UpdateProductRequest $request, $id)
     {
-        $updateDetails =[
-            'name' => $request->name,
-            'details' => $request->details
-        ];
-
-        DB::beginTransaction();
         try{
+            $updateDetails =[
+                'name' => $request->name,
+                'details' => $request->details
+            ];
 
-             $product = $this->productService->update($updateDetails,$id);
-
-             DB::commit();
-             return ApiResponseClass::sendResponse('Produto atualizado com sucesso','',201);
+            $this->productService->update($updateDetails,$id);
+            return ApiResponseClass::sendResponse('Produto atualizado com sucesso','',201);
 
         }catch(\Exception $ex){
             return ApiResponseClass::rollback($ex);
