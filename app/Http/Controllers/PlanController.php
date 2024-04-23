@@ -41,7 +41,7 @@ class PlanController extends Controller
             $plan = $this->planService->delete($id);
 
             if($plan > 0){
-                return ApiResponseClass::sendResponse('', 'Plano deletado com sucesso', 200);
+                return ApiResponseClass::sendResponse('', 'Plano deletado com sucesso', 204);
             }
 
         } catch (\Exception $ex){
