@@ -1,10 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseRequest as BaseRequest;
 
 
 class UpdateProductRequest extends BaseRequest

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-use App\Http\Requests\BaseRequest as BaseRequest;
+use App\Http\Requests\BaseRequest;
 
 class StoreProductRequest extends BaseRequest
 {
