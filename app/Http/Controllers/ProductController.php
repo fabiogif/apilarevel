@@ -64,7 +64,9 @@ class ProductController extends Controller
     {
         try{
             $product =  $this->productService->delete($id);
-        return ApiResponseClass::sendResponse(new ProductResource($product), 'Produto removido com sucesso','',204);
+            if($product > 0 ){
+                return ApiResponseClass::sendResponse(new ProductResource($product), 'Produto removido com sucesso','',204);
+            }
         }catch(\Exception $ex){
             return ApiResponseClass::rollback($ex);
         }
