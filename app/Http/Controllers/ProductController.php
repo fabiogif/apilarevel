@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\ApiResponseClass;
-use App\Models\Product;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
+use App\Http\Requests\{StoreProductRequest, UpdateProductRequest};
 use App\Http\Resources\ProductResource;
 use App\Services\ProductService;
 
@@ -19,24 +17,26 @@ class ProductController extends Controller
     public function index()
     {
         $data = $this->productService->index();
-        return ApiResponseClass::sendResponse(ProductResource::collection($data),'',200);
+        return ApiResponseClass::sendResponse(ProductResource::collection($data), '', 200);
     }
 
+//
+//    public function create(StoreProductRequest $request)
+//    {
+//
+//    }
+//
+//    public function edit(Product $product)
+//    {
+//
+//    }
 
-    public function create(StoreProductRequest $request)
-    {
-
-    }
-    public function edit(Product $product)
-    {
-
-    }
     public function store(StoreProductRequest $request)
     {
-        try{
-             $product = $this->productService->store($request->all());
-             return ApiResponseClass::sendResponse(new ProductResource($product),'Produto cadastrado com sucesso',201);
-        }catch(\Exception $ex){
+        try {
+            $product = $this->productService->store($request->all());
+            return ApiResponseClass::sendResponse(new ProductResource($product), 'Produto cadastrado com sucesso', 201);
+        } catch (\Exception $ex) {
             return ApiResponseClass::rollback($ex);
         }
     }
@@ -45,16 +45,16 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = $this->productService->getById($id);
-        return ApiResponseClass::sendResponse(new ProductResource($product),'',200);
+        return ApiResponseClass::sendResponse(new ProductResource($product), '', 200);
     }
 
 
     public function update(UpdateProductRequest $request, $id)
     {
-        try{
-            $this->productService->update($request->all(),$id);
-            return ApiResponseClass::sendResponse('Produto atualizado com sucesso','',201);
-        }catch(\Exception $ex){
+        try {
+            $this->productService->update($request->all(), $id);
+            return ApiResponseClass::sendResponse('Produto atualizado com sucesso', '', 201);
+        } catch (\Exception $ex) {
             return ApiResponseClass::rollback($ex);
         }
     }
@@ -62,12 +62,12 @@ class ProductController extends Controller
 
     public function delete($id)
     {
-        try{
-            $product =  $this->productService->delete($id);
-            if($product > 0 ){
-                return ApiResponseClass::sendResponse(new ProductResource($product), 'Produto removido com sucesso','',204);
+        try {
+            $product = $this->productService->delete($id);
+            if ($product > 0) {
+                return ApiResponseClass::sendResponse(new ProductResource($product), 'Produto removido com sucesso', '', 204);
             }
-        }catch(\Exception $ex){
+        } catch (\Exception $ex) {
             return ApiResponseClass::rollback($ex);
         }
     }

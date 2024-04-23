@@ -3,35 +3,47 @@
 namespace App\Http\Controllers;
 
 use App\Classes\ApiResponseClass;
-use App\Http\Requests\StorePlanRequest;
+use App\Http\Requests\{StorePlanRequest, UpdatePlanRequest};
 use App\Http\Resources\PlanResource;
 use App\Services\PlanService;
 
 class PlanController extends Controller
 {
-  public function __construct(private readonly PlanService $planService)
-  {
-  }
-  public function index(){
-      $plans =  $this->planService->index();
-      return ApiResponseClass::sendResponse(PlanResource::collection($plans), '', 200);
-  }
+    public function __construct(private readonly PlanService $planService)
+    {
+    }
+
+    public function index()
+    {
+        $plans = $this->planService->index();
+        return ApiResponseClass::sendResponse(PlanResource::collection($plans), '', 200);
+    }
 
     public function store(StorePlanRequest $request)
     {
-        try{
+        try {
             $plans = $this->planService->store($request->all());
             return ApiResponseClass::sendResponse(new PlanResource($plans), 'Plano adicionado com sucesso', 200);
-        } catch (\Exception $ex){
+        } catch (\Exception $ex) {
             return ApiResponseClass::rollback($ex);
         }
 
     }
 
+    public function update(UpdatePlanRequest $request, $id)
+    {
+        try {
+            $this->planService->update($request->all(), $id);
+            return ApiResponseClass::sendResponse('Plano atualizado com sucesso', '', 201);
+        } catch (\Exception $ex) {
+            return ApiResponseClass::rollback($ex);
+        }
+    }
+
     public function show($id)
     {
         $plan = $this->planService->getById($id);
-        return ApiResponseClass::sendResponse(new PlanResource($plan),'',200);
+        return ApiResponseClass::sendResponse(new PlanResource($plan), '', 200);
     }
 
     public function delete($id)
@@ -39,11 +51,11 @@ class PlanController extends Controller
         try {
             $plan = $this->planService->delete($id);
 
-            if($plan > 0){
+            if ($plan > 0) {
                 return ApiResponseClass::sendResponse('', 'Plano deletado com sucesso', 204);
             }
 
-        } catch (\Exception $ex){
+        } catch (\Exception $ex) {
             return ApiResponseClass::rollback($ex);
         }
     }

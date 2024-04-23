@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
+
 use App\Http\Requests\BaseRequest as BaseRequest;
 
 class StorePlanRequest extends BaseRequest
