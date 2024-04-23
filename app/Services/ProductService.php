@@ -4,23 +4,16 @@ namespace App\Services;
 
 use App\Interfaces\ProductRepositoryInterface;
 
-class ProductService
+readonly class ProductService
 {
 
     public function __construct(private ProductRepositoryInterface $productRepositoryInterface)
     {}
 
-
     public function index()
     {
         return $this->productRepositoryInterface->index();
     }
-
-    public function getProductById(int $id)
-    {
-        return $this->productRepositoryInterface->getById($id);
-    }
-
 
     public function store(array $data)
     {

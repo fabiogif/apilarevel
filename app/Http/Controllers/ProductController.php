@@ -35,9 +35,7 @@ class ProductController extends Controller
     {
         try{
              $product = $this->productService->store($request->all());
-
              return ApiResponseClass::sendResponse(new ProductResource($product),'Produto cadastrado com sucesso',201);
-
         }catch(\Exception $ex){
             return ApiResponseClass::rollback($ex);
         }
@@ -47,7 +45,6 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = $this->productService->getById($id);
-
         return ApiResponseClass::sendResponse(new ProductResource($product),'',200);
     }
 
@@ -57,19 +54,17 @@ class ProductController extends Controller
         try{
             $this->productService->update($request->all(),$id);
             return ApiResponseClass::sendResponse('Produto atualizado com sucesso','',201);
-
         }catch(\Exception $ex){
             return ApiResponseClass::rollback($ex);
         }
     }
 
 
-    public function destroy($id)
+    public function delete($id)
     {
         try{
-        $this->productService->delete($id);
-        return ApiResponseClass::sendResponse('Produto removido com sucesso','',204);
-
+            $product =  $this->productService->delete($id);
+        return ApiResponseClass::sendResponse(new ProductResource($product), 'Produto removido com sucesso','',204);
         }catch(\Exception $ex){
             return ApiResponseClass::rollback($ex);
         }

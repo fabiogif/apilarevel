@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface TenantRepositoryInterface
+interface PlanRepositoryInterface
 {
     public function index();
     public function getById($id);

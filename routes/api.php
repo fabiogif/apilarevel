@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\{ProductController, PlanController};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/product', [ProductController::class , 'index']);
 Route::get('/product/{id}', [ProductController::class , 'show']);
 Route::post('/product', [ProductController::class , 'store']);
-Route::delete('/product/{id}', [ProductController::class , 'destroy']);
+Route::delete('/product/{id}', [ProductController::class , 'delete']);
 Route::put('/product/{id}', [ProductController::class , 'update']);
 
+
+Route::get('/plan', [PlanController::class , 'index']);
+Route::get('/plan/{id}', [PlanController::class , 'show']);
+Route::post('/plan', [PlanController::class , 'store']);
+Route::delete('/plan/{id}', [PlanController::class , 'delete']);
+Route::put('/plan/{id}', [PlanController::class , 'update']);
 

@@ -6,7 +6,6 @@ use App\Interfaces\TenantRepositoryInterface;
 
 class TenantService
 {
-
     public function __construct(private readonly TenantRepositoryInterface $tenantRepositoryInterface)
     {}
 
@@ -15,10 +14,6 @@ class TenantService
         return $this->tenantRepositoryInterface->index();
     }
 
-    public function getProductById(int $id)
-    {
-        return $this->tenantRepositoryInterface->getById($id);
-    }
 
     public function store(array $data)
     {

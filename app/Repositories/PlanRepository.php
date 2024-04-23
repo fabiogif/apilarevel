@@ -2,15 +2,15 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\TenantRepositoryInterface;
-use App\Models\Product;
+use App\Interfaces\PlanRepositoryInterface;
+use App\Models\Plan;
 
-class TenantRepository implements TenantRepositoryInterface
+class PlanRepository implements PlanRepositoryInterface
 {
-    protected Product $entity;
-    public function __construct(Product $product)
+    protected Plan $entity;
+    public function __construct(Plan $plan)
     {
-        $this->entity = $product;
+        $this->entity = $plan;
     }
 
     public function index()
