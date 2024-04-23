@@ -6,7 +6,6 @@ use App\Classes\ApiResponseClass;
 use App\Http\Requests\StorePlanRequest;
 use App\Http\Resources\PlanResource;
 use App\Services\PlanService;
-use Illuminate\Http\Request;
 
 class PlanController extends Controller
 {

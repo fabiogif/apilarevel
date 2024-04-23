@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Http\Requests;
-
-
-use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Requests\BaseRequest as BaseRequest;
 
 class StoreProductRequest extends BaseRequest
@@ -22,5 +19,5 @@ class StoreProductRequest extends BaseRequest
         ];
     }
 
-    
+
 }

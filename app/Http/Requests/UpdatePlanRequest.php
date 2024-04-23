@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Requests;
+use App\Http\Requests\BaseRequest as BaseRequest;
 
-use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePlanRequest extends FormRequest
+class UpdatePlanRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
