@@ -13,25 +13,13 @@ class ProductController extends Controller
     public function __construct(private readonly ProductService $productService)
     {
     }
-
     public function index()
     {
         $data = $this->productService->index();
         return ApiResponseClass::sendResponse(ProductResource::collection($data), '', 200);
     }
 
-//
-//    public function create(StoreProductRequest $request)
-//    {
-//
-//    }
-//
-//    public function edit(Product $product)
-//    {
-//
-//    }
-
-    public function store(StoreProductRequest $request)
+    public function store(StorePr   oductRequest $request)
     {
         try {
             $product = $this->productService->store($request->all());
@@ -41,13 +29,11 @@ class ProductController extends Controller
         }
     }
 
-
     public function show($id)
     {
         $product = $this->productService->getById($id);
         return ApiResponseClass::sendResponse(new ProductResource($product), '', 200);
     }
-
 
     public function update(UpdateProductRequest $request, $id)
     {
@@ -58,7 +44,6 @@ class ProductController extends Controller
             return ApiResponseClass::rollback($ex);
         }
     }
-
 
     public function delete($id)
     {

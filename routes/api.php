@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{ProductController, PlanController};
+use App\Http\Controllers\{ProductController, PlanController, DetailPlanController};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +23,11 @@ Route::post('/product', [ProductController::class , 'store']);
 Route::delete('/product/{id}', [ProductController::class , 'delete']);
 Route::put('/product/{id}', [ProductController::class , 'update']);
 
+Route::get('/plan/{id}/detail', [DetailPlanController::class , 'index']);
+Route::get('/plan/{id}/detail/{id}', [DetailPlanController::class , 'show']);
+Route::post('/plan/{id}/detail', [DetailPlanController::class , 'store']);
+Route::delete('/plan/{id}/detail/{id}', [DetailPlanController::class , 'delete']);
+Route::put('/plan/{id}/detail/{id}', [DetailPlanController::class , 'update']);
 
 Route::get('/plan', [PlanController::class , 'index']);
 Route::get('/plan/{id}', [PlanController::class , 'show']);

@@ -3,14 +3,12 @@
 namespace App\Repositories;
 
 use App\Interfaces\PlanRepositoryInterface;
-use App\Models\Plan;
+use App\Models\{Plan,Tenant};
 
 class PlanRepository implements PlanRepositoryInterface
 {
-    protected Plan $entity;
-    public function __construct(Plan $plan)
+    public function __construct(protected Plan $entity)
     {
-        $this->entity = $plan;
     }
 
     public function index()
@@ -35,6 +33,11 @@ class PlanRepository implements PlanRepositoryInterface
      public function delete($id)
      {
          return $this->entity->destroy($id);
+     }
+
+     public function tenant(array $array)
+     {
+        return $this->entity->hasMany(Tenant::class);
      }
 
 

@@ -7,15 +7,13 @@ use App\Models\Product;
 
 class ProductRepository implements ProductRepositoryInterface
 {
-    protected $entity;
-    public function __construct(Product $product)
+    public function __construct(protected Product $entity)
     {
-        $this->entity = $product;
     }
 
     public function index()
     {
-        return $this->entity->all();
+        return $this->entity->paginate();
     }
 
      public function getById($id)

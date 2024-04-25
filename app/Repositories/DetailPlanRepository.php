@@ -2,12 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\TenantRepositoryInterface;
-use App\Models\Product;
+use App\Interfaces\DetailPlanRepositoryInterface;
+use App\Models\DetailPlan;
+use App\Models\Plan;
 
-class TenantRepository implements TenantRepositoryInterface
+class DetailPlanRepository implements DetailPlanRepositoryInterface
 {
-    public function __construct(protected Product $entity)
+    public function __construct(protected  DetailPlan $entity)
     {
     }
 

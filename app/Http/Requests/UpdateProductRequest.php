@@ -23,7 +23,11 @@ class UpdateProductRequest extends BaseRequest
     {
         return [
             'name' => 'required',
-            'details' => 'required'
+            'description' => 'required',
+            'price' => 'required',
+            'flag' => 'required',
+            'category_id' => 'required',
+            'tenant_id' => 'required',
         ];
     }
 

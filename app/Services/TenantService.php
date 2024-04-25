@@ -2,11 +2,15 @@
 
 namespace App\Services;
 
+use App\Interfaces\PlanRepositoryInterface;
 use App\Interfaces\TenantRepositoryInterface;
+use Illuminate\Support\Str;
 
 class TenantService
 {
-    public function __construct(private readonly TenantRepositoryInterface $tenantRepositoryInterface)
+    public function __construct(
+        private readonly TenantRepositoryInterface $tenantRepositoryInterface,
+        private readonly PlanRepositoryInterface $planRepositoryInterface)
     {}
 
     public function index()
@@ -17,6 +21,12 @@ class TenantService
 
     public function store(array $data)
     {
+                $this->planRepositoryInterface->tenant()->create([
+                    'name' => $data['name'],
+                    'cnpj' => $data['cnpj'],
+                    'url' => Str::kebab($data['empresa']) ,
+                ]);
+
         return $this->tenantRepositoryInterface->store($data);
     }
 
@@ -35,8 +45,4 @@ class TenantService
         return $this->tenantRepositoryInterface->delete($id);
     }
 
-    public function getAllTenants()
-    {
-        return $this->tenantRepositoryInterface->getAllTenants();
-    }
 }
