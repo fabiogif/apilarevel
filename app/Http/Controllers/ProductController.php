@@ -19,7 +19,7 @@ class ProductController extends Controller
         return ApiResponseClass::sendResponse(ProductResource::collection($data), '', 200);
     }
 
-    public function store(StorePr   oductRequest $request)
+    public function store(StoreProductRequest $request)
     {
         try {
             $product = $this->productService->store($request->all());

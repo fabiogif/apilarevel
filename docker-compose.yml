@@ -27,13 +27,14 @@ services:
             - meilisearch
             - mailpit
             - selenium
+            - memcached
     mysql:
         image: 'mysql/mysql-server:8.0.32'
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ROOT_HOST: '%'
+            MYSQL_ROOT_HOST: '${DB_HOST}'
             MYSQL_DATABASE: '${DB_DATABASE}'
             MYSQL_USER: '${DB_USERNAME}'
             MYSQL_PASSWORD: '${DB_PASSWORD}'
@@ -93,17 +94,25 @@ services:
         networks:
             - sail
     selenium:
-        image: selenium/standalone-chrome
+        image: seleniarm/standalone-chromium
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         volumes:
             - '/dev/shm:/dev/shm'
         networks:
             - sail
+    memcached:
+        image: 'memcached:alpine'
+        ports:
+            - '${FORWARD_MEMCACHED_PORT:-11211}:11211'
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge
 volumes:
+    apilarevel_sail:
+        driver: local
     sail-mysql:
         driver: local
     sail-redis:
