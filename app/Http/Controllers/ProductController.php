@@ -13,6 +13,7 @@ class ProductController extends Controller
     public function __construct(private readonly ProductService $productService)
     {
     }
+
     public function index()
     {
         $data = $this->productService->index();
@@ -50,7 +51,7 @@ class ProductController extends Controller
         try {
             $product = $this->productService->delete($id);
             if ($product > 0) {
-                return ApiResponseClass::sendResponse(new ProductResource($product), 'Produto removido com sucesso', '', 204);
+                return ApiResponseClass::sendResponse(new ProductResource($product), 'Produto removido com sucesso',204);
             }
         } catch (\Exception $ex) {
             return ApiResponseClass::rollback($ex);
