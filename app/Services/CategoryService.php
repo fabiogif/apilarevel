@@ -2,47 +2,37 @@
 
 namespace App\Services;
 
-use App\Interfaces\PlanRepositoryInterface;
-use App\Interfaces\TenantRepositoryInterface;
-use Illuminate\Support\Str;
+use App\Interfaces\CategoryRepositoryInterface;
 
-class TenantService
+readonly  class CategoryService
 {
-    public function __construct(
-        private readonly TenantRepositoryInterface $tenantRepositoryInterface,
-        private readonly PlanRepositoryInterface $planRepositoryInterface)
+    public function __construct(private CategoryRepositoryInterface $categoryRepositoryInterface)
     {}
 
     public function index()
     {
-        return $this->tenantRepositoryInterface->index();
+        return $this->categoryRepositoryInterface->index();
     }
 
 
     public function store(array $data)
     {
-                $this->planRepositoryInterface->tenant()->create([
-                    'name' => $data['name'],
-                    'cnpj' => $data['cnpj'],
-                    'url' => Str::kebab($data['empresa']) ,
-                ]);
-
-        return $this->tenantRepositoryInterface->store($data);
+        return $this->categoryRepositoryInterface->store($data);
     }
 
     public function getById(int $id)
     {
-        return $this->tenantRepositoryInterface->getById($id);
+        return $this->categoryRepositoryInterface->getById($id);
     }
 
     public function update(array $data, int $id)
     {
-        return $this->tenantRepositoryInterface->update($data, $id);
+        return $this->categoryRepositoryInterface->update($data, $id);
     }
 
     public function delete(int $id)
     {
-        return $this->tenantRepositoryInterface->delete($id);
+        return $this->categoryRepositoryInterface->delete($id);
     }
 
 }

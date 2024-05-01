@@ -14,4 +14,5 @@ class TenantController extends Controller
     {
         return $this->tenantService->index();
     }
+
 }

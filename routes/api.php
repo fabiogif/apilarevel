@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{ProductController, PlanController, DetailPlanController};
+use App\Http\Controllers\{ProductController, PlanController, DetailPlanController, CategoryController};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 //Route::apiResource('/products',ProductController::class);
 
 
+Route::get('/category', [CategoryController::class , 'index']);
+//Route::get('/category/{id}', [CategoryController::class , 'show']);
+Route::post('/category', [CategoryController::class , 'store']);
+//Route::delete('/category/{id}', [CategoryController::class , 'delete']);
+//Route::put('/category/{id}', [CategoryController::class , 'update']);
 
 Route::get('/product', [ProductController::class , 'index']);
 Route::get('/product/{id}', [ProductController::class , 'show']);

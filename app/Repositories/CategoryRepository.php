@@ -2,18 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\TenantRepositoryInterface;
-use App\Models\Product;
+use App\Interfaces\CategoryRepositoryInterface;
+use App\Models\Category;
 
-class CategoryRepository implements TenantRepositoryInterface
+class CategoryRepository implements CategoryRepositoryInterface
 {
-    public function __construct(protected Product $entity)
+    public function __construct(protected Category $entity)
     {
     }
 
     public function index()
     {
-        return $this->entity->all();
+        return $this->entity->paginate(15);
     }
 
      public function getById($id)
