@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\ApiResponseClass;
+use Illuminate\Http\JsonResponse;
 use App\Http\Requests\{StoreProductRequest, UpdateProductRequest};
 use App\Http\Resources\ProductResource;
 use App\Services\ProductService;
@@ -14,13 +15,13 @@ class ProductController extends Controller
     {
     }
 
-    public function index()
+    public function index(): JsonResponse
     {
         $data = $this->productService->index();
         return ApiResponseClass::sendResponse(ProductResource::collection($data), '', 200);
     }
 
-    public function store(StoreProductRequest $request)
+    public function store(StoreProductRequest $request):JsonResponse
     {
         try {
             $product = $this->productService->store($request->all());
@@ -30,13 +31,13 @@ class ProductController extends Controller
         }
     }
 
-    public function show($id)
+    public function show($id):JsonResponse
     {
         $product = $this->productService->getById($id);
         return ApiResponseClass::sendResponse(new ProductResource($product), '', 200);
     }
 
-    public function update(UpdateProductRequest $request, $id)
+    public function update(UpdateProductRequest $request, $id):JsonResponse
     {
         try {
             $this->productService->update($request->all(), $id);
@@ -46,13 +47,12 @@ class ProductController extends Controller
         }
     }
 
-    public function delete($id)
+    public function delete($id):JsonResponse
     {
         try {
             $product = $this->productService->delete($id);
-            if ($product > 0) {
-                return ApiResponseClass::sendResponse(new ProductResource($product), 'Produto removido com sucesso',204);
-            }
+            return ApiResponseClass::sendResponse(new ProductResource($product), 'Produto removido com sucesso',204);
+
         } catch (\Exception $ex) {
             return ApiResponseClass::rollback($ex);
         }
