@@ -18,7 +18,7 @@ class PlanRepository implements PlanRepositoryInterface
 
      public function getById($id)
      {
-        return $this->entity->findOrFail($id);
+        return $this->entity->where('id', $id)->first();
      }
      public function store(array $data)
      {
@@ -35,10 +35,10 @@ class PlanRepository implements PlanRepositoryInterface
          return $this->entity->destroy($id);
      }
 
-     public function tenant(array $array)
-     {
+    public function tenant()
+    {
         return $this->entity->hasMany(Tenant::class);
-     }
+    }
 
 
 }

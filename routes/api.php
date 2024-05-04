@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{ProductController, PlanController, DetailPlanController, CategoryController};
+use App\Http\Controllers\{ProductController, PlanController, DetailPlanController,TenantController, CategoryController};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 
 //Route::apiResource('/products',ProductController::class);
+
+
+Route::get('/tenant', [TenantController::class , 'index']);
+Route::post('/tenant', [TenantController::class , 'store']);
 
 
 Route::get('/category', [CategoryController::class , 'index']);

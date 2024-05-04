@@ -3,11 +3,11 @@
 namespace App\Repositories;
 
 use App\Interfaces\TenantRepositoryInterface;
-use App\Models\Product;
+use App\Models\Tenant;
 
 class TenantRepository implements TenantRepositoryInterface
 {
-    public function __construct(protected Product $entity)
+    public function __construct(protected Tenant $entity)
     {
     }
 

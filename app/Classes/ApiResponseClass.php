@@ -13,6 +13,7 @@ class ApiResponseClass
         //
     }
     public static function rollback($e, $message ="Algo deu errado! Processo não concluído"){
+        dd($e);
         DB::rollBack();
       return  self::throw($e, $message);
     }
